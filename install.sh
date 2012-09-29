@@ -21,10 +21,11 @@ echo "Installing required software..."
 apt-get install -y git htop man
 
 # Create a temporary directory
-mkdir /tmp/cwlab && cd /tmp/cwlab
+mkdir /tmp/cwlab
+cd /tmp/cwlab
 
 # Get the configuration files
-git clone git://github.com/cwlab/install.git install
+git clone git://github.com/cwlab/install.git
 
 # Start copying files
 echo "Copying Skeleton files..."
