@@ -24,7 +24,7 @@ apt-get install -y git
 mkdir /tmp/cwlab && cd /tmp/cwlab
 
 # Get the configuration files
-git checkout https://github.com/cwlab/install.git install
+git clone git://github.com/cwlab/install.git install
 
 # Start copying files
 echo "Copying Skeleton files..."
