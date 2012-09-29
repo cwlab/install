@@ -6,8 +6,8 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 # check whether installation is already executed
-if [ -e /etc/cwlab/ ]; then
-    echo "The CWLab install script has already been run on this machine!"
+if [ -e ~/.installed ]; then
+    echo "The install script has already been run on this machine!"
     exit 1
 fi
 
@@ -29,3 +29,6 @@ git checkout https://github.com/cwlab/install.git install
 # Start copying files
 echo "Copying Skeleton files..."
 cp -R "etc/skel" /etc
+
+# Leave a trace
+touch ~/.installed
