@@ -31,5 +31,9 @@ git clone git://github.com/cwlab/install.git
 echo "Copying Skeleton files..."
 cp -R install/etc/skel/ /etc
 
+# Get the new .bashrc file
+cp /etc/skel/.bashrc ~
+source ~/.bashrc
+
 # Leave a trace
 touch ~/.installed
