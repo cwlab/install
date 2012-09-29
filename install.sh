@@ -7,10 +7,13 @@ fi
 
 # check whether installation is already executed
 
-if [[ sudo stat /root/.installed ]]; then
+if [[ $(sudo stat /root/.installed > /dev/null 2>&1 && echo '1') -eq 1 ]]; then
    	echo "The install script has already been run on this machine!" >&2
    	exit 1
 fi
+
+echo "Installing aptitude..." >&2
+sudo apt-get install aptitude
 
 echo "Updating package repositories..." >&2
 sudo apt-get update > /dev/null
