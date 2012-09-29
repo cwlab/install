@@ -13,13 +13,13 @@ if [ sudo stat /root/.installed ]; then
 fi
 
 echo "Updating package repositories..." >&2
-sudo aptitude update > /dev/null
+sudo apt-get update > /dev/null
 
 echo "Updating software..."
-sudo aptitude upgrade -y > /dev/null
+sudo apt-get dist-upgrade -y > /dev/null
 
 echo "Installing required software..." >&2
-wget -q -O- https://cwlab.github.com/install/packages | xargs sudo aptitude install -y
+wget -q -O- http://cwlab.github.com/install/packages | xargs sudo apt-get install -y
 
 # Create a temporary directory
 mkdir /tmp/cwlab
