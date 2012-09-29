@@ -1,8 +1,23 @@
 #!/bin/bash
 
-if [ $EUID -ne 0 ]; then
-    echo "This script must be run as root" 1>&2
-    exit 1
+USER=${1:-root}
+
+if [[ $USER = 'root' ]]; then
+	if [ $EUID -eq 0 ]; then
+		echo "Don't run this script as root, it will ask for root permissions when needed." >&2
+		exit 1
+	fi
+	sudo $0 $(whoami) || exit $$
+	
+	. ~/.bashrc
+	exit 0
+else
+	if [ $EUID -eq 0 ]; then
+		echo -n ''
+	else
+		echo "Run this script without params" >&2
+		exit 1
+	fi
 fi
 
 # check whether installation is already executed
@@ -31,9 +46,12 @@ git clone git://github.com/cwlab/install.git
 echo "Copying Skeleton files..." >&2
 cp -R install/etc/skel /etc/
 
-# Get the new .bashrc file
-cp install/root/.bashrc /root
-. /root/.bashrc
+# Get the new /root/.bashrc file
+cat install/root/.bashrc > /root/.bashrc
+[ -x /root/.bashrc ] || chmod +x /root/.bashrc
+
+# Get the new .bashrc file in the homedir of our current user
+su $USER -c 'cat /etc/skel/.bashrc > ~/.bashrc'
 
 # Leave a trace
 touch /root/.installed
