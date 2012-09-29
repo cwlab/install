@@ -27,13 +27,13 @@ if [ -e /root/.installed ]; then
 fi
 
 echo "Updating package repositories..." >&2
-sudo apt-get update > /dev/null
+apt-get update > /dev/null
 
 echo "Updating software..."
-sudo apt-get upgrade -y > /dev/null
+apt-get upgrade -y > /dev/null
 
 echo "Installing required software..." >&2
-wget -q -O- https://cwlab.github.com/install/packages | xargs sudo apt-get install -y
+wget -q -O- https://cwlab.github.com/install/packages | xargs apt-get install -y
 
 # Create a temporary directory
 mkdir /tmp/cwlab
@@ -44,7 +44,7 @@ git clone -q git://github.com/cwlab/install.git
 
 # Start copying files
 echo "Copying Skeleton files..." >&2
-sudo cp -f install/etc/skel/.bashrc /etc/skel
+cp -f install/etc/skel/.bashrc /etc/skel
 
 # Get the new /root/.bashrc file
 cat install/root/.bashrc > /root/.bashrc
@@ -52,6 +52,3 @@ cat install/root/.bashrc > /root/.bashrc
 
 # Get the new .bashrc file in the homedir of our current user
 su $USER -c 'cat /etc/skel/.bashrc > ~/.bashrc'
-
-# End elevated privileges
-sudo -K
