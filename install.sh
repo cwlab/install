@@ -2,7 +2,7 @@
 
 if [ `whoami` != "root" ]; then
     echo "This script must be run as root" 1>&2
-    exit -1
+    exit 1
 fi
 
 # check whether installation is already executed
