@@ -19,7 +19,7 @@ mkdir /tmp/cwlab
 cd /tmp/cwlab
 
 # Get the configuration files
-git clone git://github.com/cwlab/install.git
+git clone -q git://github.com/cwlab/install.git
 
 # Start copying files
 echo "Copying Skeleton files..." >&2
