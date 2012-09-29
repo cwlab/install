@@ -6,20 +6,17 @@ if [ $EUID -eq 0 ]; then
 fi
 
 # check whether installation is already executed
-checkInstalled() {
-	if [ -e /root/.installed ]; then
-    	echo "The install script has already been run on this machine!" >&2
-    	exit 1
-	fi
-}
 
-sudo checkInstalled
+if [ sudo stat /root/.installed ]; then
+   	echo "The install script has already been run on this machine!" >&2
+   	exit 1
+fi
 
 echo "Updating package repositories..." >&2
-sudo aptitutde update > /dev/null
+sudo aptitude update > /dev/null
 
 echo "Updating software..."
-sudo aptititude upgrade -y > /dev/null
+sudo aptitude upgrade -y > /dev/null
 
 echo "Installing required software..." >&2
 wget -q -O- https://cwlab.github.com/install/packages | xargs sudo aptitude install -y
@@ -36,12 +33,7 @@ echo "Copying Skeleton files..." >&2
 sudo cp -f install/etc/skel/.bashrc /etc/skel
 
 # Get the new /root/.bashrc file
-rootBashrc() {
-	cat install/root/.bashrc > /root/.bashrc
-	[ -x /root/.bashrc ] || chmod +x /root/.bashrc
-}
-
-sudo rootBashrc
+cat install/root/.bashrc | sudo tee /root/.bashrc > /dev/null
 
 # Get the new .bashrc file in the homedir of our current user
 cat /etc/skel/.bashrc > ~/.bashrc
