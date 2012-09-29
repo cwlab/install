@@ -12,6 +12,9 @@ if [ sudo stat /root/.installed ]; then
    	exit 1
 fi
 
+echo "Installing aptitude..." >&2
+sudo apt-get install aptitude
+
 echo "Updating package repositories..." >&2
 sudo aptitude update > /dev/null
 
