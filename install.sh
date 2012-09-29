@@ -29,7 +29,7 @@ git clone git://github.com/cwlab/install.git
 
 # Start copying files
 echo "Copying Skeleton files..."
-cp -R "etc/skel" /etc
+cp -R etc/skel/ /etc
 
 # Leave a trace
 touch ~/.installed
