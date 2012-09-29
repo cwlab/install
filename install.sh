@@ -7,7 +7,7 @@ fi
 
 # check whether installation is already executed
 
-if [[ sudo stat /root/.installed ]]; then
+if [[ $(sudo stat /root/.installed > /dev/null 2>&1 && echo '1') -eq 1 ]]; then
    	echo "The install script has already been run on this machine!" >&2
    	exit 1
 fi
