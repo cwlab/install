@@ -18,7 +18,7 @@ echo "Updating software..."
 apt-get dist-upgrade -y > /dev/null
 
 echo "Installing required software..."
-apt-get install -y git
+apt-get install -y git htop man
 
 # Create a temporary directory
 mkdir /tmp/cwlab && cd /tmp/cwlab
