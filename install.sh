@@ -28,3 +28,6 @@ sudo cp -f install/etc/skel/.bashrc /etc/skel
 # Install the new .bashrc file
 cp /etc/skel/.bashrc ~
 source  ~/.bashrc
+
+# End elevated privileges
+sudo -K
