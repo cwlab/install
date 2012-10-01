@@ -12,9 +12,6 @@ if [[ $(sudo stat /root/.installed > /dev/null 2>&1 && echo '1') -eq 1 ]]; then
    	exit 1
 fi
 
-echo "Installing aptitude..." >&2
-sudo apt-get install aptitude
-
 echo "Updating package repositories..." >&2
 sudo apt-get update > /dev/null
 
